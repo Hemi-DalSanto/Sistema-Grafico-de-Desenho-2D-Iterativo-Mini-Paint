@@ -3,29 +3,32 @@
 #include <iostream>
 
 int main() {
-Framebuffer fb(800, 600, {255, 255, 255});
+    // Canvas 800x600 com fundo branco (255, 255, 255)
+    Color fundo = {255, 255, 255};
+    Framebuffer fb(800, 600, fundo);
 
+    Color preto    = {0, 0, 0};
     Color vermelho = {255, 0, 0};
     Color verde    = {0, 255, 0};
     Color azul     = {0, 0, 255};
 
-    // Testa reta
-    draw_line(10, 10, 100, 80, vermelho);
+    // 1. Reta
+    draw_line(fb, 20, 20, 200, 100, preto);
 
-    // Testa retângulos
-    draw_rect(120, 20, 50, 40, verde);
-    draw_rect_filled(180, 20, 50, 40, azul);
+    // 2. Retângulos (vazado e preenchido)
+    draw_rect(fb, 50, 150, 120, 80, vermelho);
+    draw_rect_filled(fb, 220, 150, 120, 80, azul);
 
-    // Testa círculos
-    draw_circle(300, 150, 40, vermelho);
-    draw_circle_filled(400, 150, 40, verde);
+    // 3. Círculos (vazado e preenchido)
+    draw_circle(fb, 450, 200, 60, verde);
+    draw_circle_filled(fb, 620, 200, 60, vermelho);
 
-    // Testa balde de tinta em região fechada
-    flood_fill(125, 25, azul);
+    // 4. Balde de tinta dentro do retângulo vazado
+    flood_fill(fb, 60, 160, verde);
 
-    // Exporta imagem para validar visualmente
-    // framebuffer.exportar_imagem("teste_saida.ppm");
+    // Exporta imagem em formato PPM para conferência visual
+    fb.export_ppm("teste_saida.ppm");
 
-    std::cout << "Testes de rasterizacao executados com sucesso!" << std::endl;
+    std::cout << "Sucesso! Imagem 'teste_saida.ppm' gerada com todas as figuras." << std::endl;
     return 0;
 }

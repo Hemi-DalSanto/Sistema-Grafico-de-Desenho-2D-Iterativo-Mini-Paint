@@ -1,2 +1,8 @@
 teste.cpp
 teste_rasterizacao.cpp
+
+# Saídas da compilação e do botão Salvar
+minipaint
+minipaint.exe
+*.o
+desenho.ppm
